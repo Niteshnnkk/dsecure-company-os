@@ -437,7 +437,7 @@ def recurring_holiday():
 
 if not any(
     cmd in sys.argv
-    for cmd in ["makemigrations", "migrate", "compilemessages", "flush", "shell"]
+    for cmd in ["makemigrations", "migrate", "compilemessages", "flush", "shell", "collectstatic", "test"]
 ):
     scheduler = BackgroundScheduler()
 
