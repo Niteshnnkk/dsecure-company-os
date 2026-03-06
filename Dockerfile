@@ -23,7 +23,7 @@ COPY . .
 
 RUN chmod +x /app/entrypoint.sh
 
-RUN python3 manage.py collectstatic --noinput
+RUN python3 manage.py collectstatic --noinput --ignore="*.map" --ignore="mock-doc"
 
 EXPOSE 8000
 
