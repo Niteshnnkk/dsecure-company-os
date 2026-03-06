@@ -23,7 +23,10 @@ COPY . .
 
 RUN chmod +x /app/entrypoint.sh
 
-RUN python3 manage.py collectstatic --noinput --ignore="*.map" --ignore="mock-doc"
+RUN mkdir -p /app/static/build/vendor/ionicons/@stencil/core/mock-doc/ && \
+    touch /app/static/build/vendor/ionicons/@stencil/core/mock-doc/sizzle.min.map
+
+RUN python3 manage.py collectstatic --noinput
 
 EXPOSE 8000
 
