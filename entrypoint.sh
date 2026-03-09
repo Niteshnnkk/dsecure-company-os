@@ -1,8 +1,5 @@
 #!/bin/bash
 set -e
 
-echo "Running database migrations in background..."
-python3 manage.py migrate --noinput &
-
 echo "Starting gunicorn server..."
-exec gunicorn --bind 0.0.0.0:8000 --workers 2 --timeout 120 horilla.wsgi:application
+exec gunicorn --bind 0.0.0.0:${PORT:-8000} --workers 1 --threads 2 --timeout 120 horilla.wsgi:application
