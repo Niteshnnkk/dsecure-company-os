@@ -1,3 +1,4 @@
+import os
 """
 Module for managing biometric devices and employee attendance.
 
@@ -435,7 +436,7 @@ def biometric_device_schedule(request, device_id):
                         "interval",
                         seconds=str_time_seconds(device.scheduler_duration),
                     )
-                    scheduler.start()
+                    if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                     return HttpResponse("<script>window.location.reload()</script>")
                 except Exception as error:
                     logger.error("An error comes in biometric_device_schedule ", error)
@@ -465,7 +466,7 @@ def biometric_device_schedule(request, device_id):
                     "interval",
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
-                scheduler.start()
+                if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                 return HttpResponse("<script>window.location.reload()</script>")
             elif device.machine_type == "dahua":
                 device.is_scheduler = True
@@ -478,7 +479,7 @@ def biometric_device_schedule(request, device_id):
                     "interval",
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
-                scheduler.start()
+                if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                 return HttpResponse("<script>window.location.reload()</script>")
             elif device.machine_type == "cosec":
                 device.is_scheduler = True
@@ -495,7 +496,7 @@ def biometric_device_schedule(request, device_id):
                     "interval",
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
-                scheduler.start()
+                if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                 return HttpResponse("<script>window.location.reload()</script>")
             elif device.machine_type == "etimeoffice":
                 device.is_scheduler = True
@@ -508,7 +509,7 @@ def biometric_device_schedule(request, device_id):
                     "interval",
                     seconds=str_time_seconds(device.scheduler_duration),
                 )
-                scheduler.start()
+                if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                 return HttpResponse("<script>window.location.reload()</script>")
             else:
                 return HttpResponse("<script>window.location.reload()</script>")
@@ -2637,7 +2638,7 @@ try:
                         "interval",
                         seconds=str_time_seconds(device.scheduler_duration),
                     )
-                    scheduler.start()
+                    if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                 elif device.machine_type == "zk":
                     scheduler = BackgroundScheduler()
                     scheduler.add_job(
@@ -2646,7 +2647,7 @@ try:
                         seconds=str_time_seconds(device.scheduler_duration),
                         id=f"biometric_{device.id}",
                     )
-                    scheduler.start()
+                    if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                 elif device.machine_type == "dahua":
                     scheduler = BackgroundScheduler()
                     scheduler.add_job(
@@ -2654,7 +2655,7 @@ try:
                         "interval",
                         seconds=str_time_seconds(device.scheduler_duration),
                     )
-                    scheduler.start()
+                    if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
 
                 elif device.machine_type == "cosec":
                     scheduler = BackgroundScheduler()
@@ -2663,7 +2664,7 @@ try:
                         "interval",
                         seconds=str_time_seconds(device.scheduler_duration),
                     )
-                    scheduler.start()
+                    if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
 
                 elif device.machine_type == "etimeoffice":
                     scheduler = BackgroundScheduler()
@@ -2672,7 +2673,7 @@ try:
                         "interval",
                         seconds=str_time_seconds(device.scheduler_duration),
                     )
-                    scheduler.start()
+                    if not os.environ.get('DISABLE_SCHEDULERS'): scheduler.start()
                 else:
                     pass
 except:

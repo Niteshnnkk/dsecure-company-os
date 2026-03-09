@@ -1,3 +1,4 @@
+import os
 import calendar
 import datetime as dt
 import sys
@@ -58,4 +59,5 @@ if not any(
     scheduler.add_job(candidate_convert, "interval", minutes=5)
     scheduler.add_job(recruitment_close, "interval", hours=1)
 
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

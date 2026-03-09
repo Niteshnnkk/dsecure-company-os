@@ -1,3 +1,4 @@
+import os
 import datetime
 import sys
 from datetime import timedelta
@@ -142,4 +143,5 @@ if not any(
     scheduler = BackgroundScheduler()
     scheduler.add_job(update_experience, "interval", hours=4)
     scheduler.add_job(block_unblock_disciplinary, "interval", seconds=25)
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

@@ -58,7 +58,8 @@ scheduler = BackgroundScheduler()
 #             scheduler.add_job(backup_database, trigger='cron', hour=local_backup.hour, minute=local_backup.minute, id='backup_job')
 #         # Start the scheduler if it's not already running
 #         if not scheduler.running:
-#             scheduler.start()
+#             if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()
 #     else:
 #         stop_backup_job()
 
@@ -256,7 +257,8 @@ def start_gdrive_backup_job():
 
         # Start the scheduler if it's not already running
         if not scheduler.running:
-            scheduler.start()
+            if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()
     else:
         stop_gdrive_backup_job()
 

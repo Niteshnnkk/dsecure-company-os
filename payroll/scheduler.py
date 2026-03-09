@@ -1,3 +1,4 @@
+import os
 """
 scheduler.py
 
@@ -145,4 +146,5 @@ if not any(
     scheduler = BackgroundScheduler()
     scheduler.add_job(expire_contract, "interval", hours=4)
     scheduler.add_job(auto_payslip_generate, "interval", hours=3)
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

@@ -1,3 +1,4 @@
+import os
 """
 outlook_auth/scheduler.py
 
@@ -39,4 +40,5 @@ if not any(
         minutes=50,
         id="refresh_outlook_auth_token",
     )
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

@@ -119,6 +119,9 @@ if env("DATABASE_URL", default=None):
     DATABASES = {
         "default": env.db(),
     }
+    # Add connection pooling for remote Supabase DB (10 mins reuse)
+    DATABASES["default"]["CONN_MAX_AGE"] = 600
+    DATABASES["default"]["CONN_HEALTH_CHECKS"] = True
 else:
     DATABASES = {
         "default": {
@@ -136,6 +139,14 @@ else:
             "PORT": env("DB_PORT", default=""),
         }
     }
+
+# Caching Configuration
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'horilla-cache',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

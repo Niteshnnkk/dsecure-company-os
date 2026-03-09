@@ -1,3 +1,4 @@
+import os
 import calendar
 import sys
 from datetime import date, datetime, timedelta
@@ -498,4 +499,5 @@ if not any(
         pass
 
     scheduler.add_job(recurring_holiday, "interval", hours=4)
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

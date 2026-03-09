@@ -1,3 +1,4 @@
+import os
 import calendar
 import datetime as dt
 import sys
@@ -56,4 +57,5 @@ if not any(
     scheduler = BackgroundScheduler()
     scheduler.add_job(leave_reset, "interval", seconds=20)
 
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

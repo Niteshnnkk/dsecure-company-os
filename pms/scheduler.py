@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -44,4 +45,5 @@ scheduler.add_job(
     cyclic_feedback_creation, cron_trigger, misfire_grace_time=grace_time_seconds
 )
 
-scheduler.start()
+if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

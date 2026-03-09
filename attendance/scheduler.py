@@ -1,3 +1,4 @@
+import os
 import datetime
 import sys
 
@@ -69,4 +70,5 @@ if not any(
         replace_existing=True,
     )
 
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()

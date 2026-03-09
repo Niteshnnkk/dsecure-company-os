@@ -1,3 +1,4 @@
+import os
 """
 scheduler.py
 
@@ -99,4 +100,5 @@ if not any(
     scheduler = BackgroundScheduler()
     scheduler.add_job(notify_expiring_assets, "interval", days=1)
     scheduler.add_job(notify_expiring_documents, "interval", hours=4)
-    scheduler.start()
+    if not os.environ.get('DISABLE_SCHEDULERS'):
+        scheduler.start()
