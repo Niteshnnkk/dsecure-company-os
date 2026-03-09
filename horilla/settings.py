@@ -119,9 +119,6 @@ if env("DATABASE_URL", default=None):
     DATABASES = {
         "default": env.db(),
     }
-    # Add connection pooling for remote Supabase DB (10 mins reuse)
-    DATABASES["default"]["CONN_MAX_AGE"] = 600
-    DATABASES["default"]["CONN_HEALTH_CHECKS"] = True
 else:
     DATABASES = {
         "default": {
